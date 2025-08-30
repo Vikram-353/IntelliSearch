@@ -18,7 +18,7 @@ app.use(
   cors({
     origin:
       process.env.NODE_ENV === "production"
-        ? "your-production-domain.com"
+        ? "https://intellisearch-sshn.onrender.com"
         : "http://localhost:5173",
     credentials: true,
   })
