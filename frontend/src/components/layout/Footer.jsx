@@ -11,7 +11,11 @@ const Footer = () => {
             <div className="col-span-1 md:col-span-2">
               <div className="flex items-center space-x-2 mb-4">
                 <h1 className="text-3xl font-bold text-gray-900 mb-2 flex items-center gap-3">
-                  <Brain className="w-8 h-8 text-blue-600" />
+                  <img
+                    className="w-10 h-10 text-blue-600"
+                    src="./logo.svg"
+                    alt="logo"
+                  />
                   IntelliSearch
                 </h1>
               </div>

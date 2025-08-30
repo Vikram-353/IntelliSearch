@@ -43,8 +43,12 @@ const LoginForm = () => {
         {/* Header */}
         <div className="text-center mb-8">
           <div className="flex justify-center">
+            <img
+              className="w-20 h-20 text-blue-600"
+              src="./logo.svg"
+              alt="logo"
+            />
             <h1 className="text-5xl font-bold text-gray-900 mb-2 flex items-center gap-3">
-              <Brain className="w-10 h-10 text-blue-600" />
               IntelliSearch
             </h1>
           </div>

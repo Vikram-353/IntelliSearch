@@ -1,28 +1,42 @@
-import React from 'react';
-import { Link, Navigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import { motion } from 'framer-motion';
-import { User, Mail, Lock, ArrowRight } from 'lucide-react';
-import { useAuth } from '../../contexts/AuthContext';
-import Button from '../ui/Button';
-import Input from '../ui/Input';
+import React from "react";
+import { Link, Navigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { motion } from "framer-motion";
+import { User, Mail, Lock, ArrowRight, Brain } from "lucide-react";
+import { useAuth } from "../../contexts/AuthContext";
+import Button from "../ui/Button";
+import Input from "../ui/Input";
 
 const schema = yup.object({
-  firstName: yup.string().required('First name is required').min(2, 'First name must be at least 2 characters'),
-  lastName: yup.string().required('Last name is required').min(2, 'Last name must be at least 2 characters'),
-  email: yup.string().email('Invalid email').required('Email is required'),
-  password: yup.string().required('Password is required').min(6, 'Password must be at least 6 characters'),
-  confirmPassword: yup.string()
-    .required('Please confirm your password')
-    .oneOf([yup.ref('password')], 'Passwords must match')
+  firstName: yup
+    .string()
+    .required("First name is required")
+    .min(2, "First name must be at least 2 characters"),
+  lastName: yup
+    .string()
+    .required("Last name is required")
+    .min(2, "Last name must be at least 2 characters"),
+  email: yup.string().email("Invalid email").required("Email is required"),
+  password: yup
+    .string()
+    .required("Password is required")
+    .min(6, "Password must be at least 6 characters"),
+  confirmPassword: yup
+    .string()
+    .required("Please confirm your password")
+    .oneOf([yup.ref("password")], "Passwords must match"),
 });
 
 const RegisterForm = () => {
   const { register: registerUser, loading, isAuthenticated } = useAuth();
-  const { register, handleSubmit, formState: { errors } } = useForm({
-    resolver: yupResolver(schema)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
   });
 
   if (isAuthenticated) {
@@ -44,10 +58,19 @@ const RegisterForm = () => {
       >
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
-            <span className="text-white font-bold text-xl">A</span>
+          <div className="flex justify-center">
+            <img
+              className="w-20 h-20 text-blue-600"
+              src="./logo.svg"
+              alt="logo"
+            />
+            <h1 className="text-5xl font-bold text-gray-900 mb-2 flex items-center gap-3">
+              IntelliSearch
+            </h1>
           </div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Create Account</h1>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+            Create Account
+          </h1>
           <p className="text-gray-600">Join us today and get started</p>
         </div>
 
@@ -61,14 +84,14 @@ const RegisterForm = () => {
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div className="grid grid-cols-2 gap-4">
               <Input
-                {...register('firstName')}
+                {...register("firstName")}
                 label="First Name"
                 placeholder="John"
                 icon={User}
                 error={errors.firstName?.message}
               />
               <Input
-                {...register('lastName')}
+                {...register("lastName")}
                 label="Last Name"
                 placeholder="Doe"
                 error={errors.lastName?.message}
@@ -76,7 +99,7 @@ const RegisterForm = () => {
             </div>
 
             <Input
-              {...register('email')}
+              {...register("email")}
               type="email"
               label="Email Address"
               placeholder="john@example.com"
@@ -85,7 +108,7 @@ const RegisterForm = () => {
             />
 
             <Input
-              {...register('password')}
+              {...register("password")}
               type="password"
               label="Password"
               placeholder="Enter your password"
@@ -94,7 +117,7 @@ const RegisterForm = () => {
             />
 
             <Input
-              {...register('confirmPassword')}
+              {...register("confirmPassword")}
               type="password"
               label="Confirm Password"
               placeholder="Confirm your password"
@@ -103,20 +126,23 @@ const RegisterForm = () => {
             />
 
             <div className="flex items-center">
-              <input type="checkbox" className="rounded border-gray-300 text-blue-600 focus:ring-blue-500" />
+              <input
+                type="checkbox"
+                className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+              />
               <span className="ml-2 text-sm text-gray-600">
-                I agree to the{' '}
-                <a href="#" className="text-blue-600 hover:text-blue-800">Terms of Service</a>
-                {' '}and{' '}
-                <a href="#" className="text-blue-600 hover:text-blue-800">Privacy Policy</a>
+                I agree to the{" "}
+                <a href="#" className="text-blue-600 hover:text-blue-800">
+                  Terms of Service
+                </a>{" "}
+                and{" "}
+                <a href="#" className="text-blue-600 hover:text-blue-800">
+                  Privacy Policy
+                </a>
               </span>
             </div>
 
-            <Button
-              type="submit"
-              loading={loading}
-              className="w-full group"
-            >
+            <Button type="submit" loading={loading} className="w-full group">
               Create Account
               <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-200" />
             </Button>
@@ -124,8 +150,11 @@ const RegisterForm = () => {
 
           <div className="mt-6 text-center">
             <p className="text-gray-600">
-              Already have an account?{' '}
-              <Link to="/login" className="text-blue-600 hover:text-blue-800 font-medium transition-colors duration-200">
+              Already have an account?{" "}
+              <Link
+                to="/login"
+                className="text-blue-600 hover:text-blue-800 font-medium transition-colors duration-200"
+              >
                 Sign in
               </Link>
             </p>
